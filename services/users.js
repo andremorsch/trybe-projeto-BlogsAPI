@@ -16,7 +16,7 @@ const prepareResponse = (success, code, message = '') => ({
   message,
 });
 
-const validateEmailTrue = async (email) => {
+const validateEmail = async (email) => {
   const userEmail = await User.findAll({ where: { email } });
   if (userEmail.length) return prepareResponse(false, 409, 'User already registered');
   if (!email) return prepareResponse(false, 400, '"email" is required');
@@ -45,11 +45,11 @@ const validatePassword = async (password) => {
 
 const create = async (displayName, email, password, image) => {
   try {
-    const validateEmailTrueResp = await validateEmailTrue(email);
+    const validateEmailResp = await validateEmail(email);
     const validateDisplayNameResp = await validateDisplayName(displayName);
     const validatePasswordResp = await validatePassword(password);
 
-    if (!validateEmailTrueResp.success) return validateEmailTrueResp;
+    if (!validateEmailResp.success) return validateEmailResp;
     if (!validateDisplayNameResp.success) return validateDisplayNameResp;
     if (!validatePasswordResp.success) return validatePasswordResp;
 
