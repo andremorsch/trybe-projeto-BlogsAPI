@@ -7,7 +7,7 @@ const create = async (req, res) => {
     return res.status(loginServicesRes.code).json({ message: loginServicesRes.message });
   }
 
-  return res.status(loginServicesRes.code).json({ token: loginServicesRes.token });
+  return res.status(loginServicesRes.code).json({ token: loginServicesRes.message });
 };
 
 module.exports = {

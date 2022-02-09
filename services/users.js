@@ -62,6 +62,29 @@ const create = async (displayName, email, password, image) => {
   }
 };
 
+const validateToken = async (auth) => {
+  try {
+    if (!auth) return prepareResponse(false, 401, 'Token not found');
+    const token = jwt.verify(auth, secret);
+    if (token) return prepareResponse(true, 200, '');
+  } catch (error) {
+    return prepareResponse(false, 401, 'Expired or invalid token');
+  }
+};
+
+const selectAllUsers = async () => {
+  try {
+    const userList = await User.findAll();
+    const response = prepareResponse(true, 200, userList);
+
+    return response;
+  } catch (error) {
+    return prepareResponse(false, 500, error.message);
+  }
+};
+
 module.exports = {
   create,
+  validateToken,
+  selectAllUsers,
 };

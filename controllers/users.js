@@ -10,6 +10,18 @@ const create = async (req, res) => {
   return res.status(userServiceRes.code).json({ token: userServiceRes.message });
 };
 
+const selectAllUsers = async (req, res) => {
+  const allUsers = await usersService.selectAllUsers();
+  const { authorization } = req.headers;
+  const validateToken = await usersService.validateToken(authorization);
+  if (!validateToken.success) {
+    return res.status(validateToken.code).json({ message: validateToken.message });
+  }
+
+  return res.status(allUsers.code).json(allUsers.message);
+};
+
 module.exports = {
   create,
+  selectAllUsers,
 };
