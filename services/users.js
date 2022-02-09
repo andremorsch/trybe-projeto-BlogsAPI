@@ -83,8 +83,22 @@ const selectAllUsers = async () => {
   }
 };
 
+const selectById = async (id) => {
+  try {
+    const userById = await User.findOne({ where: { id } });
+
+  if (!userById) return prepareResponse(false, 404, 'User does not exist');
+  const response = prepareResponse(true, 200, userById);
+
+  return response;
+  } catch (error) {
+    return prepareResponse(false, 500, error.message);
+  }
+};
+
 module.exports = {
   create,
   validateToken,
   selectAllUsers,
+  selectById,
 };

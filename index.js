@@ -14,6 +14,8 @@ app.post('/login', loginController.create);
 
 app.get('/user', usersController.selectAllUsers);
 
+app.get('/user/:id', usersController.selectById);
+
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (request, response) => {
   response.send();
