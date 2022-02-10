@@ -35,7 +35,6 @@ const create = async (name) => {
 const selectAllCategories = async () => {
   try {
     const categoriesList = await Categorie.findAll();
-    console.log('passou');
     const response = prepareResponse(true, 200, '');
     response.message = categoriesList;
 
