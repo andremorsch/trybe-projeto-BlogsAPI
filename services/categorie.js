@@ -30,8 +30,22 @@ const create = async (name) => {
   } catch (error) {
     return prepareResponse(false, 415, 'caiu no catch');
   }
-};  
+};
+
+const selectAllCategories = async () => {
+  try {
+    const categoriesList = await Categorie.findAll();
+    console.log('passou');
+    const response = prepareResponse(true, 200, '');
+    response.message = categoriesList;
+
+    return response;
+  } catch (error) {
+    return prepareResponse(false, 415, error.message);
+  }
+};
 
 module.exports = {
   create,
+  selectAllCategories,
 };

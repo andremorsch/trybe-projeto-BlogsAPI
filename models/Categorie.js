@@ -1,6 +1,6 @@
 const Categorie = (sequelize, DataTypes) => (
   sequelize.define('Categorie', {
-    fullName: DataTypes.STRING,
+    name: DataTypes.STRING,
   }, {
     timestamps: false,
   })

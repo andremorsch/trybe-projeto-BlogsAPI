@@ -19,6 +19,8 @@ app.get('/user/:id', usersController.selectById);
 
 app.post('/categories', categoriesController.create);
 
+app.get('/categories', categoriesController.selectAllCategories);
+
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (request, response) => {
   response.send();
