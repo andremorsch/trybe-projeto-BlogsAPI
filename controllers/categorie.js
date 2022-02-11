@@ -14,7 +14,7 @@ const create = async (req, res) => {
   if (!categorieServiceRes.success) {
     return res.status(categorieServiceRes.code).json({ message: categorieServiceRes.message });
   }
-  console.log('inicia aqui', categorieServiceRes.message, 'fecha aqui');
+  
   return res.status(categorieServiceRes.code).json({
     id: categorieServiceRes.message.dataValues.id,
     name,

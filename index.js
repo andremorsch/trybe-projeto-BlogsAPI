@@ -2,6 +2,7 @@ const express = require('express');
 const usersController = require('./controllers/users');
 const loginController = require('./controllers/login');
 const categoriesController = require('./controllers/categorie');
+const blogsPostsController = require('./controllers/BlogsPosts');
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.get('/user/:id', usersController.selectById);
 app.post('/categories', categoriesController.create);
 
 app.get('/categories', categoriesController.selectAllCategories);
+
+app.post('/post', blogsPostsController.create);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (request, response) => {

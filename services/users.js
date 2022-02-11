@@ -66,7 +66,7 @@ const validateToken = async (auth) => {
   try {
     if (!auth) return prepareResponse(false, 401, 'Token not found');
     const token = jwt.verify(auth, secret);
-    if (token) return prepareResponse(true, 200, '');
+    if (token) return prepareResponse(true, 200, token);
   } catch (error) {
     return prepareResponse(false, 401, 'Expired or invalid token');
   }
