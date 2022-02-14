@@ -15,10 +15,24 @@ const create = async (req, res) => {
   if (!createPosts.success) {
     return res.status(createPosts.code).json({ message: createPosts.message });
   }
-  console.log(createPosts);
+  
   return res.status(createPosts.code).json(createPosts.message.dataValues);
+};
+
+const selectAll = async (req, res) => {
+  const { authorization = '' } = req.headers;
+
+  const validateToken = await usersService.validateToken(authorization);
+  if (!validateToken.success) {
+    return res.status(validateToken.code).json({ message: validateToken.message });
+  }
+
+  const selectAllResp = await BlogsPostsServices.selectAll();
+
+  return res.status(selectAllResp.code).json(selectAllResp.message);
 };
 
 module.exports = {
   create,
+  selectAll,
 };

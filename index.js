@@ -24,6 +24,8 @@ app.get('/categories', categoriesController.selectAllCategories);
 
 app.post('/post', blogsPostsController.create);
 
+app.get('/post', blogsPostsController.selectAll);
+
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (request, response) => {
   response.send();

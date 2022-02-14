@@ -45,6 +45,27 @@ const create = async (title = '', categoryIds = '', content = '', email = '') =>
   }
 };
 
+const selectAll = async () => {
+  try {
+    const allPosts = await BlogPosts.findAll({
+      include: [
+        { model: User, as: 'user' },
+        { model: Categorie, as: 'categories' },
+      ],
+    });
+    console.log('inicio', allPosts, 'fim');
+    if (!allPosts.length) return prepareResponse(false, 400, '');
+
+    const response = prepareResponse(true, 200, allPosts);
+
+    return response;
+  } catch (error) {
+    console.log('inicio', error.message, 'fim');
+    return prepareResponse(false, 444, error.message);
+  }
+};
+
 module.exports = {
   create,
+  selectAll,
 };
